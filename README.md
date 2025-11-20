@@ -62,9 +62,9 @@ Sample Mercedes products, breaking vehicles, and blog posts live in `prisma/seed
 - Suitable for Vercel or any Node host.
 - Dockerfile included for container deployments.
 - `docker-compose.yml` sets up app + PostgreSQL for local dev.
-- **GitHub Actions:** `.github/workflows/deploy.yml` runs lint/tests on every push and deploys `main` to Vercel when secrets are present.
-  - Required secrets: `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `DATABASE_URL`, `NEXTAUTH_SECRET`, `ADMIN_PASSWORD`, `SALES_EMAIL`, SMTP creds, Zoho keys, SnapScan + Masterpass keys, and `NEXTAUTH_URL`/`NEXT_PUBLIC_SITE_URL` for production URLs.
-  - Create your production PostgreSQL database first (e.g., managed Postgres), set `DATABASE_URL` in repo secrets, and Vercel will use it during build/deploy. The same pipeline can target any Node host that pulls the container image if you swap the deploy step.
+- **GitHub Actions:** `.github/workflows/deploy.yml` runs lint/tests on every push and deploys `main` to Vercel. It reads the configuration from repository **Variables** or **Secrets** (using `vars.*` or `secrets.*`), so you can keep non-sensitive values outside the secrets store while still protecting sensitive ones.
+  - Required configuration (variables or secrets): `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`, `DATABASE_URL`, `NEXTAUTH_SECRET`, `ADMIN_PASSWORD`, `SALES_EMAIL`, SMTP creds, Zoho keys, SnapScan + Masterpass keys, and `NEXTAUTH_URL`/`NEXT_PUBLIC_SITE_URL` for production URLs.
+  - Create your production PostgreSQL database first (e.g., managed Postgres), set `DATABASE_URL` in repo variables/secrets, and Vercel will use it during build/deploy. The same pipeline can target any Node host that pulls the container image if you swap the deploy step.
 
 ## Tests
 
